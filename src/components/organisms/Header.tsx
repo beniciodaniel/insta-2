@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import { Logo } from '../atoms'
+import { Logo, Search } from '../atoms'
+import { SearchIcon } from '@heroicons/react/outline'
 
 export function Header() {
   return (
@@ -9,6 +9,7 @@ export function Header() {
         <Logo />
 
         {/* Middle */}
+        <Search />
 
         {/* Right */}
       </div>
