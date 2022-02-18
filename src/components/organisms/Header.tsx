@@ -1,17 +1,13 @@
 import { Logo, Search } from '../atoms'
-import { SearchIcon } from '@heroicons/react/outline'
+import { NavButtons } from '../molecules'
 
 export function Header() {
   return (
-    <div>
-      <div className="flex max-w-6xl justify-between bg-white">
-        {/* Left */}
+    <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
+      <div className="mx-5 flex max-w-6xl justify-between lg:mx-auto">
         <Logo />
-
-        {/* Middle */}
         <Search />
-
-        {/* Right */}
+        <NavButtons />
       </div>
     </div>
   )
