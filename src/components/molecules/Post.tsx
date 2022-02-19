@@ -1,7 +1,5 @@
-import { EmojiHappyIcon } from '@heroicons/react/outline'
-
 import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid'
-import { PostButtons, PostHeader } from '.'
+import { PostButtons, PostCaption, PostHeader, PostInput } from '.'
 
 interface Post {
   id: string | number
@@ -21,16 +19,13 @@ export function Post({
   return (
     <div className="my-7 rounded-sm border bg-white">
       <PostHeader username={username} userImage={userImage} />
-
       <img src={image} alt="Post image" className="w-full object-cover" />
-
       <PostButtons />
-
-      {/* Caption */}
+      <PostCaption username={username} caption={caption} />
 
       {/* Comments */}
 
-      {/* Input */}
+      <PostInput />
     </div>
   )
 }
