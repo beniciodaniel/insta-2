@@ -30,6 +30,7 @@ export function Post({
       <PostHeader username={username} userImage={userImage} />
 
       {/* Image */}
+      <img src={image} alt="Post image" className="w-full object-cover" />
 
       {/* Buttons */}
 
