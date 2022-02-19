@@ -1,5 +1,6 @@
 export { NavButtons } from './NavButtons'
 export { Post } from './Post'
-export { PostHeader } from './PostHeader'
 export { Posts } from './Posts'
+export { PostHeader } from './PostHeader'
+export { PostButtons } from './PostButtons'
 export { Stories } from './Stories'
