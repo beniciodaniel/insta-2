@@ -9,7 +9,7 @@ export function Feed() {
       </section>
 
       <section className="hidden md:col-span-1 xl:inline-grid">
-        <div className="fixed top-20">
+        <div className="fixed top-20 mt-14 ml-10 space-y-4">
           <MiniProfile />
           <Suggestions />
         </div>

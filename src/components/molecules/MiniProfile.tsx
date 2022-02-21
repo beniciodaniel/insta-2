@@ -1,6 +1,7 @@
 export function MiniProfile() {
   return (
-    <div className="mt-14 ml-10 flex items-center justify-between">
+    // <div className="mt-14 ml-10 flex items-center justify-between">
+    <div className="flex items-center justify-between">
       <img
         className="h-16 w-16 rounded-full border p-[2px]"
         src="https://avatars.githubusercontent.com/u/52285940?v=4"

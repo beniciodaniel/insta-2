@@ -1,6 +1,6 @@
-import { faker } from '@faker-js/faker'
 import { ContextualCard } from '@faker-js/faker/helpers'
 import { useEffect, useState } from 'react'
+import { getFakerUsers } from '../../utils/getFakerUsers'
 import { Story } from '../atoms'
 
 interface FakeUsersProps extends ContextualCard {
@@ -11,11 +11,7 @@ export function Stories() {
   const [users, setUsers] = useState<FakeUsersProps[]>([])
 
   useEffect(() => {
-    const fakeUsers = [...Array(20)].map((_, index) => ({
-      ...faker.helpers.contextualCard(),
-      id: index,
-    }))
-
+    const fakeUsers = getFakerUsers(20)
     setUsers(fakeUsers)
   }, [])
 
