@@ -7,14 +7,19 @@ import {
 } from '@heroicons/react/outline'
 import { HomeIcon } from '@heroicons/react/solid'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export function NavButtons() {
   const { data: session } = useSession()
+  const router = useRouter()
 
   return (
     <div className="flex items-center justify-end space-x-4">
-      <HomeIcon className="navButton" />
-      <MenuIcon className="h-6 cursor-pointer md:hidden" />
+      <HomeIcon onClick={() => router.push('/')} className="navButton" />
+      <MenuIcon
+        onClick={() => router.push('/')}
+        className="h-6 cursor-pointer md:hidden"
+      />
 
       {session ? (
         <>
