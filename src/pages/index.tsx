@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Modal } from '../components/molecules'
 import { Feed, Header } from '../components/organisms'
 
 export default function Home() {
@@ -10,10 +11,8 @@ export default function Home() {
       </Head>
 
       <Header />
-
+      <Modal />
       <Feed />
-
-      {/* Modal */}
     </div>
   )
 }

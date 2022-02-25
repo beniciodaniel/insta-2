@@ -1,4 +1,5 @@
 export { MiniProfile } from './MiniProfile'
+export { Modal } from './Modal'
 export { NavButtons } from './NavButtons'
 export { Post } from './Post'
 export { Posts } from './Posts'
