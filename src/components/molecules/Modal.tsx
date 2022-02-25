@@ -7,6 +7,7 @@ import { CameraIcon } from '@heroicons/react/outline'
 export function Modal() {
   const [open, setOpen] = useRecoilState(modalState)
   const filePickerRef = useRef<null | HTMLInputElement>(null)
+  const captionRef = useRef<null | HTMLInputElement>(null)
   const [selectedFile, setSelectedFile] = useState<
     string | ArrayBuffer | null | undefined
   >(null)
@@ -97,7 +98,7 @@ export function Modal() {
                       <div className="mt-2">
                         <input
                           className="w-full border-none text-center focus:ring-0"
-                          // ref={captionRef}
+                          ref={captionRef}
                           placeholder="Please enter a caption..."
                           type="text"
                         />
