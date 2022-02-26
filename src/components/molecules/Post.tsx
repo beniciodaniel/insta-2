@@ -1,10 +1,13 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
   Timestamp,
 } from 'firebase/firestore'
 import { useSession } from 'next-auth/react'
@@ -34,6 +37,11 @@ interface Comment {
   id: string
 }
 
+interface Like {
+  id: string
+  username: string
+}
+
 interface Props {
   post: Post
 }
@@ -44,6 +52,8 @@ export function Post({
   const { data: session } = useSession()
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState<Comment[]>([])
+  const [likes, setLikes] = useState<Like[]>([])
+  const [hasLiked, setHasLiked] = useState(false)
 
   const sendComment = async (event: FormEvent) => {
     event.preventDefault()
@@ -57,6 +67,16 @@ export function Post({
       userImage: session?.user.image,
       timestamp: serverTimestamp(),
     })
+  }
+
+  const likePost = async () => {
+    if (hasLiked) {
+      await deleteDoc(doc(db, 'posts', id, 'likes', session?.user.uid!))
+    } else {
+      await setDoc(doc(db, 'posts', id, 'likes', session?.user.uid!), {
+        username: session?.user.username,
+      })
+    }
   }
 
   useEffect(() => {
@@ -76,14 +96,38 @@ export function Post({
     )
 
     return unsubscribe
-  }, [db])
+  }, [db, id])
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, 'posts', id, 'likes'),
+      (snapshot) => {
+        let likesData: Like[] = []
+        snapshot.docs.forEach((likeDoc) => {
+          const like = likeDoc.data() as Like
+          likesData.push({ ...like, id: likeDoc.id })
+        })
+        setLikes(likesData)
+      }
+    )
+
+    return unsubscribe
+  }, [db, id])
+
+  useEffect(
+    () =>
+      setHasLiked(
+        likes.findIndex((like) => like.id === session?.user.uid) !== -1
+      ),
+    [likes]
+  )
 
   return (
     <div className="my-7 rounded-sm border bg-white">
       <PostHeader username={username} userImage={profileImage} />
       <img src={image} alt="Post image" className="w-full object-cover" />
 
-      {session && <PostButtons />}
+      {session && <PostButtons handleLike={likePost} hasLiked={hasLiked} />}
       <PostCaption username={username} caption={caption} />
 
       {comments.length > 0 && <PostComments comments={comments} />}
