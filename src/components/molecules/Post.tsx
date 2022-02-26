@@ -128,7 +128,8 @@ export function Post({
       <img src={image} alt="Post image" className="w-full object-cover" />
 
       {session && <PostButtons handleLike={likePost} hasLiked={hasLiked} />}
-      <PostCaption username={username} caption={caption} />
+
+      <PostCaption username={username} caption={caption} likes={likes} />
 
       {comments.length > 0 && <PostComments comments={comments} />}
 
