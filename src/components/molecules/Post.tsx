@@ -1,4 +1,5 @@
 import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid'
+import { useSession } from 'next-auth/react'
 import { PostButtons, PostCaption, PostHeader, PostInput } from '.'
 
 interface Post {
@@ -15,16 +16,19 @@ interface Props {
 export function Post({
   post: { caption, image, profileImage, username },
 }: Props) {
+  const { data: session } = useSession()
+
   return (
     <div className="my-7 rounded-sm border bg-white">
       <PostHeader username={username} userImage={profileImage} />
       <img src={image} alt="Post image" className="w-full object-cover" />
-      <PostButtons />
+
+      {session && <PostButtons />}
       <PostCaption username={username} caption={caption} />
 
       {/* Comments */}
 
-      <PostInput />
+      {session && <PostInput />}
     </div>
   )
 }
